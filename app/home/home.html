@@ -1,0 +1,20 @@
+<div class="row">
+    <div class="col-lg-2">&nbsp;</div>
+    <div class="col-lg-8">
+
+        <!-- Starter -->
+        <div class="jumbotron">
+            <div class="container">
+                <h1>{{ vm.title }}</h1>
+                <p>Bienvenue sur {{ vm.title }}</p>
+                <p>Composer et commander votre pizza en cliquant sur le boutton ci-dessous !</p>
+                
+                <a href="#/order" class="btn btn-primary">Composez votre pizza !</a>
+                <a href="#/pizza" class="btn btn-primary">Sélectionner une pizza !</a>
+            </div>
+            <div ng-include="'app/shared/authors.html'"></div>
+        </div>
+
+    </div>
+    <div class="col-lg-2">&nbsp;</div>
+</div>

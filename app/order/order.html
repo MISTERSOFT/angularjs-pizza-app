@@ -1,0 +1,59 @@
+<div class="row mt50">
+    <div class="col-md-2">&nbsp;</div>
+    <div class="col-md-8">
+        <!-- Commande -->
+        <h1>Composez votre pizza</h1>
+        <div class="well">
+            <form>
+                <h1>{{ vm.title }}</h1>
+                <div class="form-group">
+                    <label for="dough">{{ vm.pizza.dough.name }}</label>
+                    <select class="form-control" name="dough" id="dough">
+                        <option ng-repeat="ing in vm.pizza.dough.ingredients" value="{{ing}}">{{ing}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label for="base">{{ vm.pizza.base.name }}</label>
+                        </div>
+                        <div class="col-md-10">
+                            <div ng-repeat="ing in vm.pizza.base.ingredients">
+                                <label for="base_{{$index}}">{{ing.name}} {{ing.price}} €
+                                    <input type="checkbox" id="base_{{$index}}" name="base" ng-model="ing.selected" ng-click="vm.uncheck(ing)">
+                                    {{$parent.ing}}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label for="base">Ingrédients</label>
+                        </div>
+                        <div class="col-md-10">
+                            <div ng-repeat="ing in vm.pizza.ingredients">
+                                <label>{{ing.name}} {{ing.price}} €
+                                    <input type="checkbox" name="base" ng-model="ing.selected" ng-click="vm.calculateTotal()">
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <p class="text-center">
+                        Vous en avez pour {{ vm.totalPrice }} €
+                    </p>
+                </div>
+                <div class="row">
+                    <div class="col-md-offset-5">
+                        <button type="submit" class="btn btn-primary" ng-click="vm.ordered()">Commander</button>
+                    </div>
+                </div>
+            </form>
+            <div ng-include="'app/shared/authors.html'"></div>
+        </div>
+    </div>
+    <div class="col-md-2">&nbsp;</div>
+</div>
