@@ -1,6 +1,6 @@
 # AngularJS Pizzeria App
 
-Shitty app for my school.
+Simple app for my school.
 
 ## Server
 Run the server :
