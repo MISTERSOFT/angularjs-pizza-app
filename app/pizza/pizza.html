@@ -1,23 +1,43 @@
-<div class="row mt50">
-	<div class="col-md-2">&nbsp;</div>
-	<div class="col-md-8">
-		<h1>Nos pizzas</h1>
-		<div class="panel panel-primary" ng-repeat="pizza in vm.pizzas">
+<div class="row">
+	<div class="col-lg-12">
+		<div class="page-header">
+			<h1>Nos pizzas</h1>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-lg-4" ng-repeat="pizza in vm.pizzas">
+		<div class="panel panel-primary">
 			<div class="panel-heading">
 				<h3 class="panel-title">{{ pizza.nom }}</h3>
 			</div>
 			<div class="panel-body">
-				<ul>
-					<li>Pate : {{ pizza.pate }}</li>
-					<li>Base : {{ pizza.base }}</li>
-					<li>Miel : {{ pizza.miel ? 'Oui' : 'Non' }}</li>
-					<li>Anchois : {{ pizza.anchois ? 'Oui' : 'Non' }}</li>
-					<li>Jambon : {{ pizza.jambon ? 'Oui' : 'Non' }}</li>
-					<li>Magret : {{ pizza.magret ? 'Oui' : 'Non' }}</li>
-				</ul>
-				<button class="btn btn-primary" ng-click="vm.ordered()">Commandez cette pizza !</button>
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="text-center">
+							<img ng-src="data:image/png;base64,{{ pizza.image }}" class="img-circle">
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-8">
+						<ul>
+							<li>Pate : {{ pizza.pate }}</li>
+							<li>Base : {{ pizza.base }}</li>
+							<li>Miel : {{ pizza.miel ? 'Oui' : 'Non' }}</li>
+							<li>Anchois : {{ pizza.anchois ? 'Oui' : 'Non' }}</li>
+							<li>Jambon : {{ pizza.jambon ? 'Oui' : 'Non' }}</li>
+							<li>Magret : {{ pizza.magret ? 'Oui' : 'Non' }}</li>
+						</ul>
+					</div>
+					<div class="col-lg-4">
+						<h1>{{ pizza.prix }} €</h1>
+					</div>
+				</div>
+			</div>
+			<div class="panel-footer text-center">
+				<button class="btn btn-primary" ng-click="vm.addToBasket(pizza)">Ajouter au panier</button>
 			</div>
 		</div>
 	</div>
-	<div class="col-md-2">&nbsp;</div>
 </div>

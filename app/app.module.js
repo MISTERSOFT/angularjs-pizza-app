@@ -4,10 +4,12 @@
     angular
         .module('app', [
         	'ngRoute',
+            'app.core',
             'app.shared',
             'app.home',
             'app.order',
-            'app.pizza'
+            'app.pizza',
+            'app.basket'
         ])
         .config(configRoutes);
 
@@ -30,6 +32,11 @@
         		controllerAs: 'vm',
         		templateUrl: 'app/pizza/pizza.html'
         	})
+            .when('/basket', {
+                controller: 'BasketController',
+                controllerAs: 'vm',
+                templateUrl: 'app/basket/basket.html'
+            })
     		.otherwise({
     			redirectTo: '/'
     		});

@@ -1,0 +1,43 @@
+<div class="row">
+	<div class="page-header">
+		<h1>Votre panier</h1>
+	</div>
+</div>
+
+<div class="row" ng-show="vm.userBasket.length === 0">
+	<div class="col-lg-12 text-center">
+		<h1>Votre panier est vide :(</h1>
+	</div>
+</div>
+
+<div class="row" ng-show="vm.userBasket.length !== 0">
+	<div class="col-lg-2">&nbsp;</div>
+	<div class="col-lg-8">
+		<ul class="list-group">
+			<li class="list-group-item" ng-repeat="pizza in vm.userBasket">
+				<div class="row">
+					<div class="col-lg-10">
+						<div class="media">
+							<div class="media-left media-middle">
+								<img class="media-object" ng-src="data:image/png;base64,{{ pizza.ingredients.image }}">
+							</div>
+							<div class="media-body">
+								<h4 class="media-heading">{{ pizza.type }}</h4>
+								<p>Pate : {{ pizza.ingredients.pate }}</p>
+								<p>Base : {{ pizza.ingredients.base }}</p>
+								<p>Miel : {{ pizza.ingredients.miel ? 'Oui' : 'Non' }}</p>
+								<p>Anchois : {{ pizza.ingredients.anchois ? 'Oui' : 'Non' }}</p>
+								<p>Jambon : {{ pizza.ingredients.jambon ? 'Oui' : 'Non' }}</p>
+								<p>Magret : {{ pizza.ingredients.magret ? 'Oui' : 'Non' }}</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-2">
+						<button class="btn btn-danger" ng-click="vm.deletePizza(pizza)">Supprimer</button>
+					</div>
+				</div>
+			</li>
+		</ul>
+	</div>
+	<div class="col-lg-2">&nbsp;</div>
+</div>

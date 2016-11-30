@@ -2,5 +2,8 @@
     'use strict';
 
     angular
-        .module('app.order', ['app.shared']);
+        .module('app.order', [
+        	'app.core',
+        	'app.shared'
+    	]);
 })();

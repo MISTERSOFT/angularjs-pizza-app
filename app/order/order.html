@@ -8,9 +8,12 @@
                 <h1>{{ vm.title }}</h1>
                 <div class="form-group">
                     <label for="dough">{{ vm.pizza.dough.name }}</label>
-                    <select class="form-control" name="dough" id="dough">
-                        <option ng-repeat="ing in vm.pizza.dough.ingredients" value="{{ing}}">{{ing}}</option>
+                    <select class="form-control" name="dough" id="dough" ng-options="ing in vm.pizza.dough.ingredients">
+                        <option ng-repeat="ing in vm.pizza.dough.ingredients" value="{{ing.name}}">{{ing.name}}</option>
                     </select>
+                    {{ vm.pizza.dough.ingredients }}
+                    {{ vm.pizza.dough.ingredients[0].selected }}
+                    {{ vm.pizza.dough.ingredients[1].selected }}
                 </div>
                 <div class="form-group">
                     <div class="row">
@@ -42,13 +45,13 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <p class="text-center">
-                        Vous en avez pour {{ vm.totalPrice }} €
-                    </p>
+                    <div class="text-center">
+                        <h3>Vous en avez pour {{ vm.totalPrice }} €</h3>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-md-offset-5">
-                        <button type="submit" class="btn btn-primary" ng-click="vm.ordered()">Commander</button>
+                        <button type="submit" class="btn btn-primary" ng-click="vm.addToBasket()">Commander</button>
                     </div>
                 </div>
             </form>

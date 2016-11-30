@@ -2,5 +2,8 @@
     'use strict';
 
     angular
-        .module('app.pizza', ['app.shared']);
+        .module('app.pizza', [
+        	'app.core',
+        	'app.shared'
+    	]);
 })();

@@ -37,6 +37,9 @@
             <li><a href="#/order">Commander</a></li>
             <li><a href="#/pizza">Nos pizzas</a></li>
           </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#/basket">Votre panier</a></li>
+          </ul>
         </div><!--/.nav-collapse -->
       </div>
     </nav>
@@ -50,14 +53,20 @@
     <!-- Partie coeur d'Angular -->
     <script type="text/javascript" src="lib/angular.js"></script>
     <script type="text/javascript" src="lib/angular-route.js"></script>
-    <!-- <script type="text/javascript" src="lib/angular-animate.min.js"></script>
+    <script type="text/javascript" src="lib/angular-animate.min.js"></script>
     <script type="text/javascript" src="lib/angular-resource.js"></script>
     <script type="text/javascript" src="lib/angular-sanitize.js"></script>
-    <script type="text/javascript" src="lib/angular-filter.js"></script> -->
+    <script type="text/javascript" src="lib/angular-filter.js"></script>
 
     <!-- My NG app -->
 
+    <!-- core : cookie -->
+    <script type="text/javascript" src="app/core/cookie/cookie.module.js"></script>
+    <script type="text/javascript" src="app/core/cookie/cookie.service.js"></script>
+    <script type="text/javascript" src="app/core/core.module.js"></script>
+
     <!-- shared -->
+    <script type="text/javascript" src="app/shared/shared.module.js"></script>
     <script type="text/javascript" src="app/shared/global.service.js"></script>
 
     <!-- home -->
@@ -71,6 +80,10 @@
     <!-- pizza -->
     <script type="text/javascript" src="app/pizza/pizza.module.js"></script>
     <script type="text/javascript" src="app/pizza/pizza.controller.js"></script>
+
+    <!-- basket -->
+    <script type="text/javascript" src="app/basket/basket.module.js"></script>
+    <script type="text/javascript" src="app/basket/basket.controller.js"></script>
 
     <!-- bootstrap ng -->
     <script type="text/javascript" src="app/app.module.js"></script>

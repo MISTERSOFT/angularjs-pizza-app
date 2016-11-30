@@ -5,62 +5,16 @@
         .module('app.order')
         .controller('OrderController', OrderController);
 
-    OrderController.$inject = ['GlobalService', '$q'];
-    function OrderController(GlobalService, $q) {
+    OrderController.$inject = ['GlobalService', '$q', 'CookieService'];
+    function OrderController(GlobalService, $q, CookieService) {
         var vm = this;
 
-        vm.pizza = {
-            dough: {
-                name: 'Pate',
-                ingredients: [
-                    'Pain',
-                    'Pizza'
-                ]
-            },
-            base: {
-                name: 'Base',
-                ingredients: [
-                    {
-                        name: 'Tomates',
-                        price: 3,
-                        selected: false
-                    },
-                    {
-                        name: 'Crème',
-                        price: 4,
-                        selected: false
-                    }
-                ]
-            },
-            ingredients: [
-                {
-                    name: 'Anchois',
-                    price: 1,
-                    selected: false
-                },
-                {
-                    name: 'Jambon',
-                    price: 2,
-                    selected: false
-                },
-                {
-                    name: 'Miel',
-                    price: 2,
-                    selected: false
-                },
-                {
-                    name: 'Magret',
-                    price: 4,
-                    selected: false
-                }
-            ]
-        };
-        vm.selectedIngredients = [];
+        vm.pizza = GlobalService.getIngredients();
         vm.totalPrice = 0;
 
         // methods
         vm.create = create;
-        vm.ordered = ordered;
+        vm.addToBasket = addToBasket;
         vm.calculateTotal = calculateTotal;
         vm.uncheck = uncheck;
 
@@ -89,18 +43,52 @@
             }
         }
 
-        function ordered() {
-            GlobalService.setLoad(true);
-            return GlobalService.setOrder()
-                .then(function(data) {
-                    console.log('ordered ', data);
-                    alert('Votre commande a bien été pris en compte !');
-                    GlobalService.setLoad(false);
-                })
-                .catch(function() {
-                    alert('Une erreur c\'est produite, votre commande n\'a pas été prise en compte');
-                });
+        /**
+         * Permet d'ajouter la pizza dans le panier
+         */
+        function addToBasket() {
+            var cookie = CookieService.getCookie('ng-pizza_basket');
+            console.log(cookie);
+
+            var pizzaObjCookie = {
+                type: 'Personnalisé',
+                ingredients: {
+                    anchois: vm.pizza.ingredients.anchois,
+                    base: (vm.pizza.base.ingredients[0].selected) ? vm.pizza.base.ingredients[0].selected : (vm.pizza.base.ingredients[1].selected) ? vm.pizza.base.ingredients[1].selected : false,
+                    chevre: vm.pizza.ingredients[4].selected,
+                    image: '',
+                    jambon: vm.pizza.ingredients[1].selected,
+                    magret: vm.pizza.ingredients[3].selected,
+                    miel: vm.pizza.ingredients[2].selected,
+                    pate: (vm.pizza.dough.ingredients[0].selected) ? vm.pizza.dough.ingredients[0].selected : (vm.pizza.dough.ingredients[1].selected) ? vm.pizza.dough.ingredients[1].selected : false,
+                    nom: 'Personnalisé',
+                    prix: calculateTotal()
+                }
+            };
+            if (cookie === null) {
+                var listPizzas = [
+                    pizzaObjCookie
+                ];
+                CookieService.setCookie('ng-pizza_basket', listPizzas);
+            }
+            else {
+                cookie.push(pizzaObjCookie);
+                CookieService.setCookie('ng-pizza_basket', cookie);
+            }
         }
+
+        // function ordered() {
+        //     // GlobalService.setLoad(true);
+        //     return GlobalService.setOrder()
+        //         .then(function(data) {
+        //             console.log('ordered ', data);
+        //             alert('Votre commande a bien été pris en compte !');
+        //             GlobalService.setLoad(false);
+        //         })
+        //         .catch(function() {
+        //             alert('Une erreur c\'est produite, votre commande n\'a pas été prise en compte');
+        //         });
+        // }
 
         function uncheck(ing) {
             for (var i = 0; i < vm.pizza.base.ingredients.length; i++) {
