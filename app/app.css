@@ -40,7 +40,10 @@ body {
   width: auto;
 }
 
-/** spin **/
+.red { color: #d9534f; }
+.green { color: #5cb85c; }
+
+/************** SPINNER ************/
 .loader-container {
   position: absolute;
   left: 50%;

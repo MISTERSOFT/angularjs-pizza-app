@@ -24,10 +24,10 @@
 						<ul>
 							<li>Pate : {{ pizza.pate }}</li>
 							<li>Base : {{ pizza.base }}</li>
-							<li>Miel : {{ pizza.miel ? 'Oui' : 'Non' }}</li>
-							<li>Anchois : {{ pizza.anchois ? 'Oui' : 'Non' }}</li>
-							<li>Jambon : {{ pizza.jambon ? 'Oui' : 'Non' }}</li>
-							<li>Magret : {{ pizza.magret ? 'Oui' : 'Non' }}</li>
+							<li>Miel : <span class="glyphicon glyphicon-{{ pizza.miel ? 'ok green' : 'remove red' }}" aria-hidden="true"></span></li>
+							<li>Anchois : <span class="glyphicon glyphicon-{{ pizza.anchois ? 'ok green' : 'remove red' }}" aria-hidden="true"></span></li>
+							<li>Jambon : <span class="glyphicon glyphicon-{{ pizza.jambon ? 'ok green' : 'remove red' }}" aria-hidden="true"></span></li>
+							<li>Magret : <span class="glyphicon glyphicon-{{ pizza.magret ? 'ok green' : 'remove red' }}" aria-hidden="true"></span></li>
 						</ul>
 					</div>
 					<div class="col-lg-4">
@@ -39,7 +39,10 @@
 				</div>
 			</div>
 			<div class="panel-footer text-center">
-				<button class="btn btn-primary" ng-click="vm.addToBasket(pizza)">Ajouter au panier</button>
+				<button class="btn btn-default" ng-click="vm.addToBasket(pizza)">
+					Ajouter au panier
+					<span class="glyphicon glyphicon-shopping-cart"></span>
+				</button>
 			</div>
 		</div>
 	</div>

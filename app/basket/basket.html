@@ -40,15 +40,17 @@
 								<h3 class="media-heading">{{ pizza.type }}</h3>
 								<p>Pate : {{ pizza.ingredients.pate }}</p>
 								<p>Base : {{ pizza.ingredients.base }}</p>
-								<p>Miel : {{ pizza.ingredients.miel ? 'Oui' : 'Non' }}</p>
-								<p>Anchois : {{ pizza.ingredients.anchois ? 'Oui' : 'Non' }}</p>
-								<p>Jambon : {{ pizza.ingredients.jambon ? 'Oui' : 'Non' }}</p>
-								<p>Magret : {{ pizza.ingredients.magret ? 'Oui' : 'Non' }}</p>
+								<p>Miel : <span class="glyphicon glyphicon-{{ pizza.ingredients.miel ? 'ok green' : 'remove red' }}" aria-hidden="true"></span></p>
+								<p>Anchois : <span class="glyphicon glyphicon-{{ pizza.ingredients.anchois ? 'ok green' : 'remove red' }}" aria-hidden="true"></span></p>
+								<p>Jambon : <span class="glyphicon glyphicon-{{ pizza.ingredients.jambon ? 'ok green' : 'remove red' }}" aria-hidden="true"></span></p>
+								<p>Magret : <span class="glyphicon glyphicon-{{ pizza.ingredients.magret ? 'ok green' : 'remove red' }}" aria-hidden="true"></span></p>
 							</div>
 						</div>
 					</div>
 					<div class="col-lg-2">
-						<button class="btn btn-danger" ng-click="vm.deletePizza(pizza)">Supprimer</button>
+						<button class="btn btn-danger" ng-click="vm.deletePizza(pizza)">
+							<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+						</button>
 						<h1>
 							{{ pizza.ingredients.prix }}
 							<span class="glyphicon glyphicon-euro" aria-hidden="true"></span>
