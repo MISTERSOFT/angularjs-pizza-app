@@ -30,8 +30,8 @@
             }
             if (newValue !== oldValue) {
                 // La class 'active-loader' est défini par défaut
-                $element[0].childNodes[0].classList.toggle('active-loader');
                 $element[0].childNodes[0].classList.toggle('hide-loader');
+                $element[0].childNodes[0].classList.toggle('active-loader');
             }
         });
     }

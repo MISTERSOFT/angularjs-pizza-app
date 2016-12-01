@@ -55,6 +55,7 @@ body {
 
   z-index: 1000;
   display: none;
+  pointer-events: none;
 }
 .loader {
   height: 100px;
@@ -93,7 +94,7 @@ body {
 
 @keyframes spin-disapear {
   0% { opacity: 1 }
-  100% { opacity: 0; }
+  100% { opacity: 0; display: none; }
 }
 /* show loader */
 .active-loader {
@@ -102,5 +103,6 @@ body {
 }
 /* play this animation when the loader need to be hide */
 .hide-loader {
-  animation: spin-disapear 1s normal forwards;
+  animation: spin-disapear 0.6s normal forwards;
+  display: block;
 }
