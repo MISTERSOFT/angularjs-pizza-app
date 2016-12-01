@@ -1,4 +1,4 @@
-<div class="row mt50">
+<div class="row">
     <div class="col-md-2">&nbsp;</div>
     <div class="col-md-8">
         <!-- Commande -->
@@ -8,12 +8,11 @@
                 <h1>{{ vm.title }}</h1>
                 <div class="form-group">
                     <label for="dough">{{ vm.pizza.dough.name }}</label>
-                    <select class="form-control" name="dough" id="dough" ng-options="ing in vm.pizza.dough.ingredients">
-                        <option ng-repeat="ing in vm.pizza.dough.ingredients" value="{{ing.name}}">{{ing.name}}</option>
+                    <select class="form-control" name="dough" id="dough"
+                            ng-options="ing as ing.name for ing in vm.pizza.dough.ingredients"
+                            ng-model="ing"
+                            ng-change="vm.selectDough(ing)">
                     </select>
-                    {{ vm.pizza.dough.ingredients }}
-                    {{ vm.pizza.dough.ingredients[0].selected }}
-                    {{ vm.pizza.dough.ingredients[1].selected }}
                 </div>
                 <div class="form-group">
                     <div class="row">
@@ -22,9 +21,10 @@
                         </div>
                         <div class="col-md-10">
                             <div ng-repeat="ing in vm.pizza.base.ingredients">
-                                <label for="base_{{$index}}">{{ing.name}} {{ing.price}} €
+                                <label for="base_{{$index}}">
+                                    {{ing.name}} {{ing.price}}
+                                    <span class="glyphicon glyphicon-euro" aria-hidden="true"></span>
                                     <input type="checkbox" id="base_{{$index}}" name="base" ng-model="ing.selected" ng-click="vm.uncheck(ing)">
-                                    {{$parent.ing}}
                                 </label>
                             </div>
                         </div>
@@ -37,7 +37,7 @@
                         </div>
                         <div class="col-md-10">
                             <div ng-repeat="ing in vm.pizza.ingredients">
-                                <label>{{ing.name}} {{ing.price}} €
+                                <label>{{ing.name}} {{ing.price}} <span class="glyphicon glyphicon-euro" aria-hidden="true"></span>
                                     <input type="checkbox" name="base" ng-model="ing.selected" ng-click="vm.calculateTotal()">
                                 </label>
                             </div>
@@ -46,7 +46,10 @@
                 </div>
                 <div class="form-group">
                     <div class="text-center">
-                        <h3>Vous en avez pour {{ vm.totalPrice }} €</h3>
+                        <h3>
+                            Vous en avez pour {{ vm.totalPrice }}
+                            <span class="glyphicon glyphicon-euro" aria-hidden="true"></span>
+                        </h3>
                     </div>
                 </div>
                 <div class="row">
@@ -55,7 +58,6 @@
                     </div>
                 </div>
             </form>
-            <div ng-include="'app/shared/authors.html'"></div>
         </div>
     </div>
     <div class="col-md-2">&nbsp;</div>

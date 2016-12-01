@@ -5,7 +5,7 @@ Simple app for my school.
 ## Server
 Run the server :
 ```
-server -jar server-v2.jar
+server -jar server-v3.jar
 ```
 
 ### Route available

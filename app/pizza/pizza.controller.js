@@ -5,13 +5,18 @@
         .module('app.pizza')
         .controller('PizzaController', PizzaController);
 
-    PizzaController.$inject = ['GlobalService', '$q', 'CookieService'];
+    PizzaController.$inject = [
+        'GlobalService', '$q', 'CookieService',
+        'LoggerService'
+    ];
 
     /* @ngInject */
-    function PizzaController(GlobalService, $q, CookieService) {
+    function PizzaController(GlobalService, $q, CookieService, 
+    LoggerService) {
         var vm = this;
 
         // members
+        vm.loading = true;
         vm.pizzas = [];
         vm.ingredients = GlobalService.getIngredients();
 
@@ -27,7 +32,7 @@
                 getAllPizzas()
             ];
             return $q.all(promises).then(function() {
-                console.log('activate done');
+                vm.loading = false;
             });
         }
 
@@ -36,12 +41,12 @@
          */
         function addToBasket(pizza) {
             var cookie = CookieService.getCookie('ng-pizza_basket');
-            console.log(cookie);
 
             var pizzaObjCookie = {
                 type: pizza.nom,
                 ingredients: pizza
             }
+
             if (cookie === null) {
                 var listPizzas = [
                     pizzaObjCookie
@@ -52,55 +57,22 @@
                 cookie.push(pizzaObjCookie);
                 CookieService.setCookie('ng-pizza_basket', cookie);
             }
+            LoggerService.success('Votre pizza a bien été ajouté dans votre panier');
         }
-
-        // /**
-        //  * Calcul le prix d'une pizza
-        //  */
-        // function calculatePizzaPrice(pizza) {
-        //     var price = 0;
-        //     var base = vm.ingredients.base.ingredients;
-        //     var ingr = vm.ingredients.ingredients;
-
-        //     // Parcours les bases
-        //     for (var i = 0; i < base.length; i++) {
-        //         // Si la base retourné par le Service Web correspond à la base
-        //         // que l'on a coté front, alors on additionne le prix de la base
-        //         // avec le prix total
-        //         if (base[i].name.toLowerCase() === pizza.base) {
-        //             price += base[i].price;
-        //         }
-        //     }
-
-        //     // Parcours les ingrédients
-        //     for (var i = 0; i < ingr.length; i++) {
-        //         // Vérifie si la pizza (WebService) procède la propriété correspondant à mon objet qui
-        //         // défini les ingérents d'une pizza
-        //         // ET
-        //         // que l'ingredient est dans la pizza
-        //         if (pizza.hasOwnProperty(ingr[i].name.toLowerCase()) && pizza[ingr[i].name.toLowerCase()]) {
-        //             price += ingr[i].price;
-        //         }
-        //     }
-
-        //     return price;
-        // }
 
         // async methods
 
         function getAllPizzas() {
             return GlobalService.getAllPizzas()
                 .then(function(data) {
-                    console.log('pizzas : ', data);
-                    angular.forEach(data, function(pizza, i) {
-                        // if (!pizza.prix) {
-                        //     // Défini une nouvelle propriété dans l'objet reçu par le WebService
-                        //     Object.defineProperty(pizza, 'price', {value: 0, writable: true});
-                        //     pizza.price = calculatePizzaPrice(pizza);
-                        // }
-                    });
-                    vm.pizzas = data;
-                    return vm.pizzas;
+                    if (data) {
+                        vm.pizzas = data;
+                        return vm.pizzas;
+                    }
+                    else {
+                        LoggerService.error('Une erreur c\'est produite. Impossible de récupérer les pizzas disponible');
+                        return false;
+                    }
                 });
         }
     }

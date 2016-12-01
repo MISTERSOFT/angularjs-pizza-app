@@ -31,7 +31,10 @@
 						</ul>
 					</div>
 					<div class="col-lg-4">
-						<h1>{{ pizza.prix }} €</h1>
+						<h1>
+							{{ pizza.prix }}
+							<span class="glyphicon glyphicon-euro" aria-hidden="true"></span>
+						</h1>
 					</div>
 				</div>
 			</div>
@@ -41,3 +44,6 @@
 		</div>
 	</div>
 </div>
+
+<!-- loader -->
+<loader loading="vm.loading"></loader>

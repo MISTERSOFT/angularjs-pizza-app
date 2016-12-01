@@ -5,8 +5,8 @@
         .module('app.shared')
         .service('GlobalService', GlobalService);
 
-    GlobalService.$inject = ['$http'];
-    function GlobalService($http) {
+    GlobalService.$inject = ['$http', 'LoggerService'];
+    function GlobalService($http, LoggerService) {
 
         var vm = this;
 

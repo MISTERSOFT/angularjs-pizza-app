@@ -3,6 +3,7 @@
 
     angular
         .module('app.core', [
+            'app.logger',
         	'app.cookie'
 		]);
 })();

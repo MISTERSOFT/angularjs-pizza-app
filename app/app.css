@@ -1,8 +1,103 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
-
-.home {
-	margin-top: 100px;
+html {
+  position: relative;
+  min-height: 100%;
 }
-.mt50 {
-	margin-top: 50px;
+body {
+  /* Margin bottom by footer height */
+  margin: 60px 0;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: #101010;
+}
+
+.footer .container {
+  padding: 0 15px;
+}
+.footer .container .text-muted {
+  margin: 20px 0;
+}
+.center-image-navbar {
+  transform: translateX(-50%);
+  left: 50%;
+  position: absolute;
+}
+.navbar>.container-fluid .navbar-brand {
+  margin-left: 0;
+}
+
+.navbar-brand {
+  padding: 0;
+}
+.navbar-brand>img {
+  height: 100%;
+  padding: 5px;
+  width: auto;
+}
+
+/** spin **/
+.loader-container {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  
+  height: 100px;
+  width: 100px;
+
+  z-index: 1000;
+  display: none;
+}
+.loader {
+  height: 100px;
+  width: 100px;
+
+  pointer-events: none;
+}
+
+@keyframes zoomInAndOut {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+.loader::before {
+  content: '';
+  position: absolute;
+
+  height: 100%;
+  width: 100%;
+
+  background-image: url(../img/pizza.png);
+  background-size: cover;
+
+  animation: zoomInAndOut 1s infinite linear;
+}
+.loader::after {
+  content: 'Chargement...';
+
+  position: absolute;
+  top: -20px;
+
+  font-weight: bold;
+  font-size: 16px;
+
+  animation: zoomInAndOut 1s infinite linear;
+}
+
+@keyframes spin-disapear {
+  0% { opacity: 1 }
+  100% { opacity: 0; }
+}
+/* show loader */
+.active-loader {
+  opacity: 1;
+  display: block;
+}
+/* play this animation when the loader need to be hide */
+.hide-loader {
+  animation: spin-disapear 1s normal forwards;
 }

@@ -2,5 +2,7 @@
     'use strict';
 
     angular
-        .module('app.shared', []);
+        .module('app.shared', [
+            'app.core'
+        ]);
 })();

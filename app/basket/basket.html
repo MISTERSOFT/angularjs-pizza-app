@@ -1,6 +1,21 @@
 <div class="row">
 	<div class="page-header">
-		<h1>Votre panier</h1>
+		<div class="row">
+			<div class="col-lg-6">
+				<h1>
+					Votre panier
+				</h1>
+			</div>
+			<div class="col-lg-6">
+				<div class="pull-right">
+					<h3 class="text-muted">
+						Total : {{ vm.totalPrice }}
+						<span class="glyphicon glyphicon-euro" aria-hidden="true"></span>
+					</h3>
+					<button class="btn btn-primary" ng-disabled="vm.totalPrice === 0">Passez commande</button>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
 
@@ -19,10 +34,10 @@
 					<div class="col-lg-10">
 						<div class="media">
 							<div class="media-left media-middle">
-								<img class="media-object" ng-src="data:image/png;base64,{{ pizza.ingredients.image }}">
+								<img class="media-object" ng-src="{{ ((pizza.ingredients.image.length > 20) ? 'data:image/png;base64,' : '') + pizza.ingredients.image }}">
 							</div>
 							<div class="media-body">
-								<h4 class="media-heading">{{ pizza.type }}</h4>
+								<h3 class="media-heading">{{ pizza.type }}</h3>
 								<p>Pate : {{ pizza.ingredients.pate }}</p>
 								<p>Base : {{ pizza.ingredients.base }}</p>
 								<p>Miel : {{ pizza.ingredients.miel ? 'Oui' : 'Non' }}</p>
@@ -34,6 +49,10 @@
 					</div>
 					<div class="col-lg-2">
 						<button class="btn btn-danger" ng-click="vm.deletePizza(pizza)">Supprimer</button>
+						<h1>
+							{{ pizza.ingredients.prix }}
+							<span class="glyphicon glyphicon-euro" aria-hidden="true"></span>
+						</h1>
 					</div>
 				</div>
 			</li>

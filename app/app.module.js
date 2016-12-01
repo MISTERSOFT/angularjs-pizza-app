@@ -4,10 +4,11 @@
     angular
         .module('app', [
         	'ngRoute',
+			'app.layout',
             'app.core',
             'app.shared',
             'app.home',
-            'app.order',
+            'app.custompizza',
             'app.pizza',
             'app.basket'
         ])
@@ -22,10 +23,10 @@
         		controllerAs: 'vm',
         		templateUrl: 'app/home/home.html'
         	})
-        	.when('/order', {
-        		controller: 'OrderController',
+        	.when('/custom', {
+        		controller: 'CustomPizzaController',
         		controllerAs: 'vm',
-        		templateUrl: 'app/order/order.html'
+        		templateUrl: 'app/custompizza/custom.pizza.html'
         	})
         	.when('/pizza', {
         		controller: 'PizzaController',

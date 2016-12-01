@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app.order', [
+        .module('app.custompizza', [
         	'app.core',
         	'app.shared'
     	]);
