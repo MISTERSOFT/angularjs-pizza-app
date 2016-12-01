@@ -23,12 +23,12 @@
         		controllerAs: 'vm',
         		templateUrl: 'app/home/home.html'
         	})
-        	.when('/custom', {
+        	.when('/custom-pizza', {
         		controller: 'CustomPizzaController',
         		controllerAs: 'vm',
         		templateUrl: 'app/custompizza/custom.pizza.html'
         	})
-        	.when('/pizza', {
+        	.when('/pizzas', {
         		controller: 'PizzaController',
         		controllerAs: 'vm',
         		templateUrl: 'app/pizza/pizza.html'

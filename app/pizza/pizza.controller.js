@@ -17,6 +17,8 @@
 
         // members
         vm.loading = true;
+        vm.searchPizza = '';
+        vm.orderPrice = '';
         vm.pizzas = [];
         vm.ingredients = GlobalService.getIngredients();
 

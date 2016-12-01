@@ -43,6 +43,10 @@ body {
 .red { color: #d9534f; }
 .green { color: #5cb85c; }
 
+.user-toolbar .input-group {
+  margin-top: 25px;
+}
+
 /************** SPINNER ************/
 .loader-container {
   position: absolute;

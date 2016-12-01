@@ -1,12 +1,37 @@
 <div class="row">
 	<div class="col-lg-12">
 		<div class="page-header">
-			<h1>Nos pizzas</h1>
+			<div class="row">
+				<div class="col-lg-6">
+					<h1>Nos pizzas</h1>
+				</div>
+				<div class="col-lg-3">
+					<div class="user-toolbar">
+						<label for="priceSearch">Prix</label>
+						<select id="priceSearch" class="form-control" ng-model="vm.orderPrice">
+							<option value="+prix">Croissant</option>
+							<option value="-prix">Décroissant</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-lg-3">
+					<div class="user-toolbar">
+						<div class="input-group">
+							<input type="text" class="form-control" placeholder="Rechercher..." aria-describedby="recherche" ng-model="vm.searchPizza.$">
+							<span class="input-group-addon" id="recherche">
+								<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+							</span>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
+
+<!-- view body -->
 <div class="row">
-	<div class="col-lg-4" ng-repeat="pizza in vm.pizzas">
+	<div class="col-lg-4" ng-repeat="pizza in vm.pizzas | filter:vm.searchPizza | orderBy:vm.orderPrice">
 		<div class="panel panel-primary">
 			<div class="panel-heading">
 				<h3 class="panel-title">{{ pizza.nom }}</h3>
