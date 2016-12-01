@@ -5,8 +5,8 @@
 		.module('app.home')
 		.controller('HomeController', HomeController);
 
-	HomeController.$inject = [];
-	function HomeController() {
+	HomeController.$inject = ['LayoutNotifier', '$timeout'];
+	function HomeController(LayoutNotifier, $timeout) {
 		var vm = this;
 
 		// members
@@ -17,6 +17,10 @@
 		activate();
 
 		function activate() {
+			console.log(LayoutNotifier);
+			$timeout(function() {
+				LayoutNotifier.navigationChanged(Date.now());
+			}, 0);
 		}
 	}
 })();

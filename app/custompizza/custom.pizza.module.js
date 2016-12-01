@@ -4,6 +4,7 @@
     angular
         .module('app.custompizza', [
         	'app.core',
-        	'app.shared'
+        	'app.shared',
+            'app.layout'
     	]);
 })();

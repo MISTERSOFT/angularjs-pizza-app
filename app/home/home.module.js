@@ -2,5 +2,8 @@
     'use strict';
 
     angular
-        .module('app.home', ['app.shared']);
+        .module('app.home', [
+            'app.shared',
+            'app.layout'
+        ]);
 })();

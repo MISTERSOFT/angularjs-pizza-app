@@ -1,0 +1,33 @@
+<!-- **************** NAV **************** -->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand center-image-navbar" href="#/">
+                <img src="img/pizza.png" alt="Logo" style="display:inline-block;">
+                <span>Pizza Mania</span>
+            </a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li ng-class="{ active : vm.isHome() }"><a href="#/">Accueil</a></li>
+                <li ng-class="{ active : vm.isCustomPizza() }"><a href="#/custom-pizza">Commander</a></li>
+                <li ng-class="{ active : vm.isPizza() }"><a href="#/pizzas">Nos pizzas</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li ng-class="{ 'active' : vm.isBasket() }">
+                    <a href="#/basket">
+                        Votre panier 
+                        <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!--/.nav-collapse -->
+    </div>
+</nav>
