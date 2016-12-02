@@ -42,6 +42,10 @@
         vm.title = ''; // Représente le title du tracker - Ex: Vous avez récemment commander
         vm.type = '';  // Représente le type de données à afficher - Ex: commande, pizza
         vm.data = [];  // Représente les données à afficher (commandes, pizza)
+        vm.sentences = {
+            custom: 'Vous avez récemment composé ces pizzas',
+            basic: 'Vous avez récemment commandé'
+        };
 
         // methods
         vm.moreDetails = moreDetails;
@@ -61,16 +65,14 @@
                  * Sinon on affiche les commandes récemment passé
                  */
                 var choose = Date.now() % 2 === 0 ? 'custom' : 'basic';
-                vm.title = (choose === 'custom') ? 'Vous avez récemment composé ces pizzas' : 'Vous avez récemment commandé';
-                vm.data = $filter('filter')(vm.cookie, function(pizza) {
-                    if (containsChoose(choose)) {
-                        if (pizza.type === choose && containsChoose(choose)) {
-                            // Pizzas personnalisé récemment
-                            return pizza;
-                        }
-                    }
-                    return pizza;
-                });
+                vm.title = vm.sentences[choose];
+
+                // récup les pizzas de puis le cookie en fonction du type choisi
+                fetchPizzaChoose(choose, true);
+                // Si aucune pizza correspondante au type choisi n'est récupéré alors on récup l'autre type
+                if (vm.data.length === 0) {
+                    fetchPizzaChoose(choose, false);
+                }
 
                 if (vm.data.length !== 0) {
                     vm.showSlider = true;
@@ -78,8 +80,7 @@
                     // Init slider
                     $timeout(function() {
                         vm.slides = $element.find('li');
-                        // console.log(vm.slides[0])
-                        // vm.sildes[0].className = 'text-center slide show-slide';
+                        jQuery(vm.slides).first().addClass('show-slide');
                         vm.slideInterval = $interval(nextSlide, vm.intervalTime);
                     }, 0);
                 }
@@ -87,15 +88,23 @@
         }
 
         /**
-         * Le cookie doit contenir au moins une pizza du type choisi (var: choose)
+         * Parcours le cookie afin de récupéré le type de pizza choisi
          */
-        function containsChoose(choose) {
+        function fetchPizzaChoose(choose, equal) {
             for(var i in vm.cookie) {
-                if (vm.cookie[i].type === choose) {
-                    return true;
+                if (equal) {
+                    if (vm.cookie[i].type === choose) {
+                        vm.data.push(vm.cookie[i]);
+                    }
+                }
+                
+                if (!equal) {
+                    if (vm.cookie[i].type !== choose) {
+                        vm.data.push(vm.cookie[i]);
+                        vm.title = vm.sentences[ (choose === 'custom') ? 'basic' : 'custom' ];
+                    }
                 }
             }
-            return false;
         }
 
         function pauseSlider() {
@@ -109,9 +118,9 @@
         }
         
         function nextSlide() {
-            vm.slides[vm.currentSlide].className = 'text-center slide';
+            jQuery(vm.slides[vm.currentSlide]).removeClass('show-slide');
             vm.currentSlide = (vm.currentSlide + 1) % vm.slides.length;
-            vm.slides[vm.currentSlide].className = 'text-center slide show-slide';
+            jQuery(vm.slides[vm.currentSlide]).addClass('show-slide');
         }
 
         function moreDetails(pizza) {
