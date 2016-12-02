@@ -6,6 +6,9 @@
         .directive('navbar', navbar);
 
     function navbar() {
+        // Usage:
+        // Affiche le menu
+        
         var directive = {
             bindToController: true,
             controller: NavbarController,

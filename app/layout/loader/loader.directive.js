@@ -6,6 +6,9 @@
         .directive('loader', loader);
 
     function loader() {
+        // Usage:
+        // Affiche le loader en forme de pizza
+
         var directive = {
             bindToController: true,
             controller: LoaderController,
@@ -30,8 +33,12 @@
             }
             if (newValue !== oldValue) {
                 // La class 'active-loader' est défini par défaut
-                $element[0].childNodes[0].classList.toggle('hide-loader');
-                $element[0].childNodes[0].classList.toggle('active-loader');
+                $element.find('div').toggleClass('hide-loader');
+                $element.find('div').toggleClass('active-loader');
+
+                // Avec ClassList (js pur)
+                // $element[0].childNodes[0].classList.toggle('hide-loader');
+                // $element[0].childNodes[0].classList.toggle('active-loader');
             }
         });
     }

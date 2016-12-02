@@ -7,12 +7,12 @@
 
     PizzaController.$inject = [
         'GlobalService', '$q', 'CookieService',
-        'LoggerService'
+        'LoggerService', 'constants'
     ];
 
     /* @ngInject */
     function PizzaController(GlobalService, $q, CookieService, 
-    LoggerService) {
+    LoggerService, constants) {
         var vm = this;
 
         // members
@@ -42,10 +42,10 @@
          * Permet d'ajouter la pizza dans le panier
          */
         function addToBasket(pizza) {
-            var cookie = CookieService.getCookie('ng-pizza_basket');
+            var cookie = CookieService.getCookie(constants.cookieBasketName);
 
             var pizzaObjCookie = {
-                type: pizza.nom,
+                type: 'basic',
                 ingredients: pizza
             }
 
@@ -53,11 +53,11 @@
                 var listPizzas = [
                     pizzaObjCookie
                 ];
-                CookieService.setCookie('ng-pizza_basket', listPizzas);
+                CookieService.setCookie(constants.cookieBasketName, listPizzas);
             }
             else {
                 cookie.push(pizzaObjCookie);
-                CookieService.setCookie('ng-pizza_basket', cookie);
+                CookieService.setCookie(constants.cookieBasketName, cookie);
             }
             LoggerService.success('Votre pizza a bien été ajouté dans votre panier');
         }

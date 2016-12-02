@@ -5,8 +5,8 @@
 		.module('app.home')
 		.controller('HomeController', HomeController);
 
-	HomeController.$inject = ['constants'];
-	function HomeController(constants) {
+	HomeController.$inject = ['constants', 'CookieService'];
+	function HomeController(constants, CookieService) {
 		var vm = this;
 
 		// members

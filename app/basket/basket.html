@@ -39,7 +39,7 @@
 								<img class="media-object" ng-src="{{ ((pizza.ingredients.image.length > 20) ? 'data:image/png;base64,' : '') + pizza.ingredients.image }}">
 							</div>
 							<div class="media-body">
-								<h3 class="media-heading">{{ pizza.type }}</h3>
+								<h3 class="media-heading">{{ pizza.ingredients.nom }}</h3>
 								<p>Pate : {{ pizza.ingredients.pate }}</p>
 								<p>Base : {{ pizza.ingredients.base }}</p>
 								<p>Miel : <span class="glyphicon glyphicon-{{ pizza.ingredients.miel ? 'ok green' : 'remove red' }}" aria-hidden="true"></span></p>

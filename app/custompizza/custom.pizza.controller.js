@@ -7,10 +7,10 @@
 
     CustomPizzaController.$inject = [
         'GlobalService', '$q', 'CookieService',
-        'LoggerService'
+        'LoggerService', 'constants'
     ];
     function CustomPizzaController(GlobalService, $q, CookieService,
-    LoggerService) {
+    LoggerService, constants) {
         var vm = this;
 
         // members
@@ -52,10 +52,10 @@
          */
         function addToBasket() {
             if (isDoughSelected()) {
-                var cookie = CookieService.getCookie('ng-pizza_basket');
+                var cookie = CookieService.getCookie(constants.cookieBasketName);
 
                 var pizzaObjCookie = {
-                    type: 'Personnalisé',
+                    type: 'custom',
                     ingredients: {
                         anchois: vm.pizza.ingredients[0].selected,
                         base: (vm.pizza.base.ingredients[0].selected) ? vm.pizza.base.ingredients[0].name
@@ -77,11 +77,11 @@
                 // Si c'est la première fois que le cookie est crée
                 if (cookie === null) {
                     var listPizzas = [pizzaObjCookie];
-                    CookieService.setCookie('ng-pizza_basket', listPizzas);
+                    CookieService.setCookie(constants.cookieBasketName, listPizzas);
                 }
                 else {
                     cookie.push(pizzaObjCookie);
-                    CookieService.setCookie('ng-pizza_basket', cookie);
+                    CookieService.setCookie(constants.cookieBasketName, cookie);
                 }
                 LoggerService.success('Votre pizza personnalisé a bien été ajouté au panier');
             }
