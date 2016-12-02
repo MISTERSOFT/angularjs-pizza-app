@@ -13,7 +13,7 @@
 							Total : {{ vm.totalPrice }}
 							<span class="glyphicon glyphicon-euro" aria-hidden="true"></span>
 						</h3>
-						<button class="btn btn-primary" ng-disabled="vm.totalPrice === 0">Passez commande</button>
+						<button class="btn btn-primary" ng-disabled="vm.totalPrice === 0" ng-click="vm.ordered()">Passez commande</button>
 					</div>
 				</div>
 			</div>

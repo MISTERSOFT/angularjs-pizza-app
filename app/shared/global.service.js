@@ -86,6 +86,7 @@
 
         function error(err) {
         	console.log('request failed ', err);
+            return err;
         }
 
         function getAllPizzas() {

@@ -5,10 +5,10 @@
         .module('app.basket')
         .controller('BasketController', BasketController);
 
-    BasketController.$inject = ['CookieService', 'LoggerService'];
+    BasketController.$inject = ['CookieService', 'LoggerService', 'GlobalService'];
 
     /* @ngInject */
-    function BasketController(CookieService, LoggerService) {
+    function BasketController(CookieService, LoggerService, GlobalService) {
         var vm = this;
 
         // members
@@ -34,12 +34,23 @@
         function ordered() {
             return GlobalService.setOrder()
                 .then(function(data) {
-                	console.log(data);
-                    LoggerService.success('Votre commande a bien été pris en compte !');
+                    if (data.status !== 500) {
+                        LoggerService.success('Votre commande a bien été pris en compte !');
+                        CookieService.removeCookie('ng-pizza_basket');
+                        vm.userBasket = [];
+                        vm.totalPrice = 0;
+                    }
+                    else {
+                        showError();
+                    }
                 })
                 .catch(function() {
-                    LoggerService.error('Une erreur c\'est produite, votre commande n\'a pas été prise en compte');
+                    showError();
                 });
+        }
+
+        function showError() {
+            LoggerService.error('Une erreur c\'est produite, votre commande n\'a pas été prise en compte');
         }
 
         function deletePizza(pizza) {
