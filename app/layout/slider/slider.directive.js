@@ -78,8 +78,8 @@
                     // Init slider
                     $timeout(function() {
                         vm.slides = $element.find('li');
-                        // console.log(vm.slides[0])
-                        // vm.sildes[0].className = 'text-center slide show-slide';
+                        console.log(jQuery(vm.slides).first());
+                        jQuery(vm.slides).first().addClass('show-slide');
                         vm.slideInterval = $interval(nextSlide, vm.intervalTime);
                     }, 0);
                 }
@@ -109,9 +109,9 @@
         }
         
         function nextSlide() {
-            vm.slides[vm.currentSlide].className = 'text-center slide';
+            jQuery(vm.slides[vm.currentSlide]).removeClass('show-slide');
             vm.currentSlide = (vm.currentSlide + 1) % vm.slides.length;
-            vm.slides[vm.currentSlide].className = 'text-center slide show-slide';
+            jQuery(vm.slides[vm.currentSlide]).addClass('show-slide');
         }
 
         function moreDetails(pizza) {
