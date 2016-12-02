@@ -6,11 +6,11 @@
         .controller('BasketController', BasketController);
 
     BasketController.$inject = ['CookieService', 'LoggerService', 'GlobalService',
-    'constants'];
+    'constants', '$filter'];
 
     /* @ngInject */
     function BasketController(CookieService, LoggerService, GlobalService,
-    constants) {
+    constants, $filter) {
         var vm = this;
 
         // members
@@ -37,8 +37,34 @@
             return GlobalService.setOrder()
                 .then(function(data) {
                     if (data.status !== 500) {
+
                         LoggerService.success('Votre commande a bien été pris en compte !');
                         CookieService.removeCookie(constants.cookieBasketName);
+
+                        // Tracker
+                        var cookieTracker = CookieService.getCookie(constants.cookieTrackerName);
+                        console.log('cookieTracker ', cookieTracker);
+                        if (cookieTracker) {
+                            for (var i in vm.userBasket) {
+                                var found = false;
+                                for (var j in cookieTracker) {
+                                    if (angular.equals(vm.userBasket[i], cookieTracker[j])) {
+                                        console.log('equals');
+                                        found = true;
+                                    }
+                                }
+                                if (!found) {
+                                    cookieTracker.push(vm.userBasket[i]);
+                                }
+                            }
+                            CookieService.setCookie(constants.cookieTrackerName, cookieTracker);
+                        }
+                        else {
+                            // Si il n'y a pas de cookie tracker
+                            CookieService.setCookie(constants.cookieTrackerName, vm.userBasket);
+                        }
+
+                        // reset
                         vm.userBasket = [];
                         vm.totalPrice = 0;
                     }
@@ -49,6 +75,22 @@
                 .catch(function() {
                     showError();
                 });
+        }
+
+        /**
+         * Vérifie si la pizza n'est pas contenu dans le cookie tracker
+         */
+        function isContainInCookie(arrCookie, pizza) {
+            // JSON.stringify(piz) === JSON.stringify(pizzaCookie)
+            var _arr = $filter('filter')(arrCookie, function(pizzaCookie) {
+                if (JSON.stringify(pizzaCookie) === JSON.stringify(pizza)) {
+                    console.log('pizza ', pizza);
+                    console.log('pizzaCookie ', pizzaCookie);
+                    return pizzaCookie;
+                }
+            });
+            
+            return _arr.length === 0 ? false : true;
         }
 
         function showError() {

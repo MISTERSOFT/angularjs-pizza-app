@@ -3,6 +3,6 @@
 
     angular.module('app.layout', [
         'app.core',
-        'ui.bootstrap.modal'
+        'ui.bootstrap'
     ]);
 })();

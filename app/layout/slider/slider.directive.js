@@ -54,7 +54,7 @@
 
         function getRandomData() {
             // use cookieTrackerName
-            vm.cookie = CookieService.getCookie(constants.cookieBasketName);
+            vm.cookie = CookieService.getCookie(constants.cookieTrackerName);
             if (vm.cookie !== null) {
                 /**
                  * Si choose = True alors on affiche les pizzas personnalisé récemment
@@ -62,15 +62,14 @@
                  */
                 var choose = Date.now() % 2 === 0 ? 'custom' : 'basic';
                 vm.title = (choose === 'custom') ? 'Vous avez récemment composé ces pizzas' : 'Vous avez récemment commandé';
-                // TODO : vérifie si le cookie contient se que 'choose' souhaite
-                vm.data = $filter('filter')(vm.cookie, function(value) {
+                vm.data = $filter('filter')(vm.cookie, function(pizza) {
                     if (containsChoose(choose)) {
                         if (pizza.type === choose && containsChoose(choose)) {
                             // Pizzas personnalisé récemment
-                            return value;
+                            return pizza;
                         }
                     }
-                    return value;
+                    return pizza;
                 });
 
                 if (vm.data.length !== 0) {
@@ -79,6 +78,8 @@
                     // Init slider
                     $timeout(function() {
                         vm.slides = $element.find('li');
+                        // console.log(vm.slides[0])
+                        // vm.sildes[0].className = 'text-center slide show-slide';
                         vm.slideInterval = $interval(nextSlide, vm.intervalTime);
                     }, 0);
                 }
@@ -116,13 +117,12 @@
         function moreDetails(pizza) {
             pauseSlider();
             var modalInstance = $uibModal.open({
-                backdrop: true,
-                bindToController: true,
-                controllerAs: 'vm',
-                controller: SliderModalController,
                 templateUrl: 'app/layout/slider/slider.modal.html',
+                backdrop: 'static',
+                bindToController: true,
+                controller: 'SliderModalController',
+                controllerAs: 'vm',
                 size: 'md',
-                ariaLabelledBy: pizza.nom,
                 resolve: {
                     pizzaDetails: function() {
                         return pizza;
@@ -130,8 +130,8 @@
                 }
             });
 
-            modalInstance.then(function(value) {
-                console.log(value);
+            modalInstance.result.then(function() {
+                playSlider();
             });
         }
     }

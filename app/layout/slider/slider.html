@@ -3,7 +3,7 @@
         <h4>{{ vm.title }}</h4>
         <div class="slider">
             <ul>
-                <li ng-repeat="pizza in vm.data" class="slide" ng-class="{ 'slide showing-slide' : $index === 0 }">
+                <li ng-repeat="pizza in vm.data" ng-class="{ 'slide show-slide' : $index === 0 }">
                     <div class="row">
                         <div class="col-lg-12">
                             <h5>{{ pizza.ingredients.nom }}</h5>

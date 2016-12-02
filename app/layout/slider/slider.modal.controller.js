@@ -5,14 +5,14 @@
         .module('app.layout')
         .controller('SliderModalController', SliderModalController);
 
-    SliderModalController.$inject = ['pizzaDetails', 'modalInstance', 'constants',
+    SliderModalController.$inject = ['pizzaDetails', '$uibModalInstance', 'constants',
     'CookieService', 'LoggerService'];
-    function SliderModalController(pizzaDetails, modalInstance, constants,
+    function SliderModalController(pizzaDetails, $uibModalInstance, constants,
     CookieService, LoggerService) {
         var vm = this;
-
+        console.log(pizzaDetails);
         // members
-        vm.pizza = pizzaDetails;
+        vm.pizza = pizzaDetails.ingredients;
         vm.addToBasket = addToBasket;
         vm.cancel = cancel;
         
@@ -32,12 +32,13 @@
                 cookie.push(pizzaDetails);
                 CookieService.setCookie(constants.cookieBasketName, cookie);
             }
-            LoggerService.success('Votre pizza ' + (pizzaDetails.type === 'custom') ? 'personnalisé' : pizzaDetails.ingredients.nom + ' a bien été ajouté au panier');
-            modalInstance.close();
+            var type = (pizzaDetails.type === 'custom') ? 'personnalisé' : pizzaDetails.ingredients.nom;
+            LoggerService.success('Votre pizza ' + type + ' a bien été ajouté au panier');
+            $uibModalInstance.close();
         }
 
         function cancel() {
-            modalInstance.close();
+            $uibModalInstance.close();
         }
     }
 })();

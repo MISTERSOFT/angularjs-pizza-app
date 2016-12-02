@@ -35,10 +35,6 @@
                 // La class 'active-loader' est défini par défaut
                 $element.find('div').toggleClass('hide-loader');
                 $element.find('div').toggleClass('active-loader');
-
-                // Avec ClassList (js pur)
-                // $element[0].childNodes[0].classList.toggle('hide-loader');
-                // $element[0].childNodes[0].classList.toggle('active-loader');
             }
         });
     }
