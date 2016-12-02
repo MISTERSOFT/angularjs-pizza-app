@@ -5,10 +5,12 @@
         .module('app.basket')
         .controller('BasketController', BasketController);
 
-    BasketController.$inject = ['CookieService', 'LoggerService', 'GlobalService'];
+    BasketController.$inject = ['CookieService', 'LoggerService', 'GlobalService',
+    'constants'];
 
     /* @ngInject */
-    function BasketController(CookieService, LoggerService, GlobalService) {
+    function BasketController(CookieService, LoggerService, GlobalService,
+    constants) {
         var vm = this;
 
         // members
@@ -36,7 +38,7 @@
                 .then(function(data) {
                     if (data.status !== 500) {
                         LoggerService.success('Votre commande a bien été pris en compte !');
-                        CookieService.removeCookie('ng-pizza_basket');
+                        CookieService.removeCookie(constants.cookieBasketName);
                         vm.userBasket = [];
                         vm.totalPrice = 0;
                     }
@@ -58,7 +60,7 @@
                 if (vm.userBasket[i].type === pizza.type) {
                     var msg = 'La pizza ' + pizza.type + ' a bien été supprimé';
                     vm.userBasket.splice(i, 1);
-                    CookieService.setCookie('ng-pizza_basket', vm.userBasket);
+                    CookieService.setCookie(constants.cookieBasketName, vm.userBasket);
                     calculateTotalPrice();
                     LoggerService.info(msg);
                 }
@@ -66,7 +68,7 @@
         }
 
         function getBasket() {
-            var cookie = CookieService.getCookie('ng-pizza_basket');
+            var cookie = CookieService.getCookie(constants.cookieBasketName);
             if (cookie !== null) {
                 vm.userBasket = cookie;
             }
