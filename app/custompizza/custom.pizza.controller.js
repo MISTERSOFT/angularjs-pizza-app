@@ -7,10 +7,10 @@
 
     CustomPizzaController.$inject = [
         'GlobalService', '$q', 'CookieService',
-        'LoggerService', 'LayoutNotifier', '$timeout'
+        'LoggerService'
     ];
     function CustomPizzaController(GlobalService, $q, CookieService,
-    LoggerService, LayoutNotifier, $timeout) {
+    LoggerService) {
         var vm = this;
 
         // members
@@ -28,10 +28,6 @@
         ////////////////
 
         function activate() {
-            console.log(LayoutNotifier);
-			$timeout(function() {
-				LayoutNotifier.navigationChanged(Date.now());
-			}, 0);
         }
 
         function calculateTotal() {

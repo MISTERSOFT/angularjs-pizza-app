@@ -5,22 +5,18 @@
 		.module('app.home')
 		.controller('HomeController', HomeController);
 
-	HomeController.$inject = ['LayoutNotifier', '$timeout'];
-	function HomeController(LayoutNotifier, $timeout) {
+	HomeController.$inject = ['constants'];
+	function HomeController(constants) {
 		var vm = this;
 
 		// members
-		vm.title = 'Pizza Mania';
+		vm.title = constants.title;
 
 		/////
 
 		activate();
 
 		function activate() {
-			console.log(LayoutNotifier);
-			$timeout(function() {
-				LayoutNotifier.navigationChanged(Date.now());
-			}, 0);
 		}
 	}
 })();

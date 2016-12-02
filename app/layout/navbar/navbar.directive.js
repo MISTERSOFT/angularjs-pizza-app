@@ -18,9 +18,9 @@
         return directive;
     }
     
-    NavbarController.$inject = ['$location', 'LayoutNotifier'];
+    NavbarController.$inject = ['$location', '$rootScope'];
     /* @ngInject */
-    function NavbarController ($location, LayoutNotifier) {
+    function NavbarController ($location, $rootScope) {
         var vm = this;
 
         // members
@@ -32,9 +32,11 @@
         vm.isPizzas = isPizzas;
         vm.isBasket = isBasket;
 
+        activate();
+
         function activate() {
-            $scope.$watch('LayoutNotifier.navigation', function() {
-                console.log('notified');
+            // Attend un changement de route
+            $rootScope.$on('$locationChangeSuccess', function(e) {
                 vm.currentUrl = $location.url();
             });
         }
