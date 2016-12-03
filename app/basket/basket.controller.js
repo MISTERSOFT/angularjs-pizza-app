@@ -81,7 +81,6 @@
          * Vérifie si la pizza n'est pas contenu dans le cookie tracker
          */
         function isContainInCookie(arrCookie, pizza) {
-            // JSON.stringify(piz) === JSON.stringify(pizzaCookie)
             var _arr = $filter('filter')(arrCookie, function(pizzaCookie) {
                 if (JSON.stringify(pizzaCookie) === JSON.stringify(pizza)) {
                     console.log('pizza ', pizza);
