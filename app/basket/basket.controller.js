@@ -14,6 +14,7 @@
         var vm = this;
 
         // members
+        vm.sentence = 'Votre panier est vide :(';
         vm.userBasket = [];
         vm.totalPrice = 0;
 
@@ -43,7 +44,6 @@
 
                         // Tracker
                         var cookieTracker = CookieService.getCookie(constants.cookieTrackerName);
-                        console.log('cookieTracker ', cookieTracker);
                         if (cookieTracker) {
                             for (var i in vm.userBasket) {
                                 var found = false;
@@ -67,6 +67,7 @@
                         // reset
                         vm.userBasket = [];
                         vm.totalPrice = 0;
+                        vm.sentence = 'Merci pour votre commande :)';
                     }
                     else {
                         showError();

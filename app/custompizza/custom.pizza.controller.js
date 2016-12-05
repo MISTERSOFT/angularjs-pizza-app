@@ -123,7 +123,6 @@
                     vm.pizza.base.ingredients[i].selected = false;
                 }
             }
-            console.log(vm.pizza.base.ingredients);
             calculateTotal();
         }
     }

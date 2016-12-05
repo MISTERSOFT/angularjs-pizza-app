@@ -72,10 +72,7 @@
         return {
         	getAllPizzas: getAllPizzas,
         	setOrder: setOrder,
-            getIngredients: getIngredients,
-            // Loader
-            setLoad: setLoad,
-            getLoad: getLoad
+            getIngredients: getIngredients
         };
 
         ////////////////
@@ -85,7 +82,6 @@
         }
 
         function error(err) {
-        	console.log('request failed ', err);
             return err;
         }
 
@@ -103,15 +99,6 @@
 
         function getIngredients() {
             return vm.ingredients;
-        }
-
-        // Loader
-        // TODO  a supprimer ?
-        function setLoad(value) {
-            vm.loading = value;
-        }
-        function getLoad() {
-            return vm.loading;
         }
     }
 })();

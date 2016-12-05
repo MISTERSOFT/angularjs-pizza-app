@@ -75,7 +75,6 @@
          * SERVER
          **************************/
         function awareSuccessToServer(message) {
-            console.log('success to server');
             $http.get('http://localhost:8008/logger?message=SUCCESS : ' + message);
         }
 
