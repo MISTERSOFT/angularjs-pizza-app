@@ -5,8 +5,8 @@
         .module('app.logger')
         .service('LoggerService', LoggerService);
 
-    LoggerService.$inject = ['toaster', '$timeout'];
-    function LoggerService(toaster, $timeout) {
+    LoggerService.$inject = ['toaster', '$timeout', '$http'];
+    function LoggerService(toaster, $timeout, $http) {
 
         var vm = this;
 
@@ -16,7 +16,9 @@
             success: success,
             error: error,
             info: info,
-            warning: warning
+            warning: warning,
+            awareSuccessToServer: awareSuccessToServer,
+            awareErrorToServer: awareErrorToServer
         };
 
         ////////////////
@@ -73,20 +75,12 @@
          * SERVER
          **************************/
         function awareSuccessToServer(message) {
-            // TODO : Do something
+            console.log('success to server');
+            $http.get('http://localhost:8008/logger?message=SUCCESS : ' + message);
         }
 
         function awareErrorToServer(message) {
-            // TODO : Do something
+            $http.get('http://localhost:8008/logger?message=ERROR : ' + message);
         }
-
-        function awareInfoToServer(message) {
-            // TODO : Do something
-        }
-
-        function awareWarningToServer(message) {
-            // TODO : Do something
-        }
-
     }
 })();

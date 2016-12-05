@@ -14,7 +14,7 @@ html {
 .container.main {
   /* Margin bottom by footer height */
   margin-top: 50px;
-  margin-bottom: 60px;
+  margin-bottom: 100px;
 }
 .footer {
   position: absolute;

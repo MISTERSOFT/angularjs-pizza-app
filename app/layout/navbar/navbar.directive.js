@@ -21,9 +21,9 @@
         return directive;
     }
     
-    NavbarController.$inject = ['$location', '$rootScope'];
+    NavbarController.$inject = ['$location', '$rootScope', 'LoggerService'];
     /* @ngInject */
-    function NavbarController ($location, $rootScope) {
+    function NavbarController ($location, $rootScope, LoggerService) {
         var vm = this;
 
         // members
@@ -41,6 +41,7 @@
             // Attend un changement de route
             $rootScope.$on('$locationChangeSuccess', function(e) {
                 vm.currentUrl = $location.url();
+                LoggerService.awareSuccessToServer('User has accessed to route : "' + vm.currentUrl + '"');
             });
         }
 
