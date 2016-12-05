@@ -12,3 +12,4 @@ Note: The server is not RESTful
 ### Route available
 - GET : /pizzas
 - GET : /commanderPizza
+- GET : /logger?message=myMessage

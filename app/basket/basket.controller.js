@@ -32,7 +32,7 @@
         }
 
         /**
-         * Permet de lancer la commande de la pizza
+         * Permet de lancer la commande de pizza
          */
         function ordered() {
             return GlobalService.setOrder()
